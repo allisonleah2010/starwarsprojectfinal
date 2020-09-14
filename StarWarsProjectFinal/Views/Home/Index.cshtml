@@ -1,0 +1,67 @@
+﻿@model StarWarsProjectFinal.Models.HomePageViewModel
+
+<h2>Star Wars Characters</h2>
+<hr />
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row form-group">
+        <div class="col-md-3">
+            @Html.TextBoxFor(textbox => textbox.SearchName, new { @class = "form-control"})
+        </div>
+        <div class="col-md-3">
+            <input type="submit" value="Search by Name" name="buttonType" class="btn btn-primary" />
+        </div>
+    </div>
+    foreach (var person in Model.People)
+    {
+    <p>
+        @if (person.Name.ToLower() != "unknown")
+        {
+            <div> @Html.LabelFor(label => person.Name): <b>@person.Name</b></div>
+        }
+
+        @if (person.BirthYear.ToLower() != "unknown")
+        {
+            <div> @Html.LabelFor(label => person.BirthYear): <b>@person.BirthYear</b></div>
+        }
+
+        @if (person.Height.ToLower() != "unknown")
+        {
+            <div> @Html.LabelFor(label => person.Height): <b>@person.Height</b></div>
+        }
+
+        @if (person.Mass.ToLower() != "unknown")
+        {
+            <div> @Html.LabelFor(label => person.Mass): <b>@person.Mass</b></div>
+        }
+
+        @if (person.EyeColor.ToLower() != "unknown")
+        {
+            <div> @Html.LabelFor(label => person.EyeColor): <b>@person.EyeColor</b></div>
+        }
+
+        @if (person.FilmCount.ToLower() != "unknown")
+        {
+            <div> @Html.LabelFor(label => person.FilmCount): <b>@person.FilmCount</b></div>
+        }
+    </p>
+    }
+
+    <div class="row">
+        @if (!string.IsNullOrEmpty(Model.Previous))
+        {
+            <div class="col-md-1">
+                @Html.HiddenFor(hidden => hidden.Previous)
+                <input type="submit" value="Previous" name="buttonType" class="btn btn-primary" />
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(Model.Next))
+        {
+            <div class="col-md-1">
+                @Html.HiddenFor(hidden => hidden.Next)
+                <input type="submit" value="Next" name="buttonType" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+}
